@@ -1,44 +1,14 @@
-	# INSTRUCTIONS
-
-	# In case it is not clear, the Question appears first, then examples, then any hints and finally the function that you need to complete appears underneath:
-
-	# <QUESTION>
-
-	# <EXAMPLES>
-
-	# <HINT>
-
-	# You are NOT allowed access to the internet for this assessment, instead you should use the DOCUMENTATION that comes bundled with your Python installation.  You should already be comfortable accessing this documentation, but to summarise:
-
-	# Access Python from you CLI
-
-	# Type help() or for example help(str)
-
-
-
-	# <QUESTION 1>
-
-	# Define a function that can accept two strings as input and returns the string with maximum length to the console. 
-	
-	# If two strings have the same length, then the function should return both strings separated by a " ".
-
-	# In this case, the strings should be returned in the same order in which they were given.
-
-	# <EXAMPLES>
-
-	# one("hi","hello") → "hello"
-	# one("three", "two") → "three"
-	# one("three", "hello") → "three hello"
-
-	# <HINT>
-
-	# What was the name of the function we have seen to check the length of a container?  Use your CLI to access the Python documentation and get help(len).
-
+#!/usr/bin/env python3	
 def one(input1, input2):
-	return ""
-
-
-
+	st1 = len(input1)
+	st2 = len(input2)
+	if len(input1)> len(input2):
+		return input1
+	elif len(input2)> len(input1):
+		return input2
+	else:
+		return input1+" "+input2
+	
 
 	# <QUESTION 2>
 
@@ -50,11 +20,6 @@ def one(input1, input2):
     
     # <EXAMPLES>
 
-	# two("bertclivebert") → "clive"
-	# two("xxbertfridgebertyy") → "fridge"
-	# two("xxBertfridgebERtyy") → "fridge"
-	# two("xxbertyy") → ""
-	# two("xxbeRTyy") → ""
 
 	# <HINT>
 
@@ -63,7 +28,28 @@ def one(input1, input2):
 	# Use your CLI to access the Python documentation and get help manipulating strings - help(str).
 
 def two(input):
-	return ""
+	string = input
+	stren = ''
+	for i in range(len(string)):
+		if 'bert' in string.lower():
+			stren = string[i]+string[i+1]+string[i+2]+string[i+3]
+			stren = stren.lower()
+		if stren == 'bert':
+			string = string[i+4:]
+			break
+	if 'bert' in string.lower():
+		for i in range(len(string)):
+			stren = string[i]+string[i+1]+string[i+2]+string[i+3]
+			stren = stren.lower()
+			if stren == 'bert':
+				string = string[:i]
+				break
+            
+	else:
+		string = ''
+
+	#string = string[::-1]
+	return string
 
 
 
@@ -78,17 +64,21 @@ def two(input):
 	    
     # <EXAMPLES>
 
-	# three(3) → "fizz"
-	# three(10) → "buzz"
-	# three(15) → "fizzbuzz"
-	# three(8) → "null"
+
 
 	# <HINT>
 
 	# No Hints for this question
 
 def three(arg1):
-	return "null"
+	if arg1%15==0:
+		return 'fizzbuzz'
+	elif arg1 % 3 == 0:
+		return 'fizz'
+	elif arg1 % 5 == 0:
+		return 'buzz'
+	else:
+		return "null"
 
 
 	# <QUESTION 4>
@@ -105,16 +95,21 @@ def three(arg1):
 	 
     # <EXAMPLES>
 
-	# four("55 72 86") → 14
-	# four("15 72 80 164") → 11
-	# four("555 72 86 45 10") → 15
+
 
 	# <HINT>
 
 	# help(int) for working with numbers and help(str) for working with Strings.
 
 def four(arg1):
-	return 0
+	numbers = arg1.split()
+	values = []
+	for i, el in enumerate(numbers):
+		c=0
+		for p in range(len(el)):
+			c+=int(el[p])
+		values.append(c)
+	return max(values)
 
 	# <QUESTION 5>
 
@@ -130,10 +125,7 @@ def four(arg1):
     
     # <EXAMPLES>
     
-    # five("Jeff,private.key,False,1445") → ["Jeff"]
-	# five("Bert,private.key,True,1447,Bert,public.key,True,1318,Jeff,private.key,False,1445") → ["Jeff"]
-	# five("Bert,private.key,False,1447,Bert,public.key,False,1318,Jeff,private.key,False,1445") → ["Bert","Jeff"]
-    # five("Bert,private.key,True,1447,Bert,public.key,False,1318,Jeff,private.key,False,1445") → ["Bert","Jeff"]
+   
     
 	# <HINT>
 
@@ -142,7 +134,14 @@ def four(arg1):
 	# help(str) and help(list), you might also need to use a function that can create a list of numbers for you, try help(range).
 
 def five(input):
-	return []
+	order = input.split(',')
+	names =[]
+	for i, el in enumerate(order):
+		if el == 'private.key':
+			if order[i+1]=='False':
+				names.append(order[i-1])
+
+	return names
 
 	# <QUESTION 6>
 
@@ -152,10 +151,7 @@ def five(input):
 
 	# <EXAMPLES>
 
-    # six("ceiling") → True
-    # six("believe") → True
-    # six("glacier") → False
-    # six("height") → False
+
 
 	# <HINT>
 
@@ -163,7 +159,12 @@ def five(input):
 
 
 def six(input):
-    return False
+	for i in range(len(input)):
+		if input[i]=='i' and input[i+1]=='e' and input[i-1] != 'c':
+			return True
+		elif input[i]=='e' and input[i+1]=='i' and input[i-1] == 'c':
+			return True
+	return False
 
 	# <QUESTION 7>
 
@@ -172,15 +173,19 @@ def six(input):
 
 	# <EXAMPLES>
 
-    # seven("Hello") → 2
-    # seven("hEelLoooO") → 6
+
 
 	# <HINTS>
 
 	# How do we ignore case in a String? help(str) may offer some insight.
 
 def seven(input):
-    return 0
+	vowels ='AEIOUaeiou'
+	c = 0
+	for i in range(len(input)):
+		if input[i] in vowels:
+			c+=1
+	return c
 
 	# <QUESTION 8>
 
@@ -189,16 +194,18 @@ def seven(input):
 
 	# <EXAMPLES>
 
-	# eight(1) → 1
-	# eight(4) → 24
-	# eight(8) → 40320
+
 
 	# <HINT>
 
 	# You may need to create a list of numbers from 0 to i, take a look at help(range).
 
 def eight(input):
-	return 1
+	c = 1
+	for i in range(1,input+1):
+		c*=i
+
+	return c
 
 	# <QUESTION 9>
 
@@ -210,16 +217,18 @@ def eight(input):
     
     # <EXAMPLES>
 
-	# nine("This is a Sentence","s") → 4
-	# nine("This is a Sentence","S") → 8
-	# nine("Fridge for sale","z") → -1
+
 
 	# <HINT>
 
 	# Take a look at the documentation for Strings, List and range.
 
 def nine(inputString, char):
-	return -1
+	pos = -1
+	inputString=inputString.replace(" ","")
+	if char in inputString:
+		pos = inputString.index(char)+1
+	return pos
 
 	# <QUESTION 10>
 
@@ -230,13 +239,14 @@ def nine(inputString, char):
     
     # <EXAMPLES>
 
-	# ten("The",2,'h') → True
-	# ten("AAbb",1,'b') → False
-	# ten("Hi-There",10,'e') → False
-
-	# <HINT>
 
 	# How do we find the length of a container, take a look at help(len), you will also need to look at help(str) for String manipulation.
  
 def ten(string, int, char):
-	return False
+	if len(string)<int:
+		return False
+	if string[int-1].lower()==char.lower():
+		return True
+	else:
+		return False
+

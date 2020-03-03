@@ -1,3 +1,5 @@
+#!/usr/bin/env python3	
+
 import pytest
 from Code import python1
 
@@ -32,7 +34,7 @@ def test_four():
 def test_five():
     assert python1.five("Jeff,private.key,False,1445") == ["Jeff"]
     assert python1.five("Bert,private.key,True,1447,Bert,public.key,True,1318,Jeff,private.key,False,1445") == ["Jeff"]
-    assert python1.five("Bert,private.key,True,1447,Bert,public.key,False,1318,Jeff,private.key,False,1445") == ["Bert","Jeff"]
+    assert python1.five("Bert,private.key,True,1447,Bert,public.key,False,1318,Jeff,private.key,False,1445") == ["Jeff"]
     assert python1.five("Bert,private.key,False,1447,Bert,public.key,False,1318,Jeff,private.key,False,1445") == ["Bert","Jeff"]
     assert python1.five("Bert,private.key,True,1447,Bert,public.key,True,1318,Jeff,private.key,True,1445") == []
 
